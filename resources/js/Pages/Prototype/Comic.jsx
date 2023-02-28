@@ -6,12 +6,15 @@ export default function Comic() {
     return (
         <>
           <Authenticated>
+            
           <div className="table-data">
 				<div className="order">
 					<div className="head">
-						<h3>Category</h3>
-                        <Link>
-						    <i className='bx bxs-smile'>Add Category</i>
+						<h3>Comic</h3>
+                        <Link href={route('prototype.add-comic')}>
+						    <PrimaryButton className="bg-green-500">
+                                Add Comic
+                            </PrimaryButton>
                         </Link>
 					</div>
 					<table>

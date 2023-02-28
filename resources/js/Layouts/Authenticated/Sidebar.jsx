@@ -44,12 +44,12 @@ export default function Sidebar (){
 				</Link>
 			</li>
 			<li>
-				<Link href="#">
+				<Link href={route('prototype.comic')}>
 					<i className='bx bxs-doughnut-chart' ></i>
 					<span className="text">Comic</span>
 				</Link>
 			</li>
-			<li>
+			{/* <li>
 				<Link href="#">
 					<i className='bx bxs-message-dots' ></i>
 					<span className="text">Message</span>
@@ -60,7 +60,7 @@ export default function Sidebar (){
 					<i className='bx bxs-group' ></i>
 					<span className="text">Team</span>
 				</Link>
-			</li>
+			</li> */}
 		</ul>
 		<ul className="side-menu">
 			<li>

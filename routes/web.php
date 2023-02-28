@@ -43,6 +43,9 @@ Route::prefix('prototype')->name('prototype.')->group(function () {
     route::get('comic', function () {
         return Inertia::render('Prototype/Comic');
     })->name('comic');
+    route::get('add-comic', function () {
+        return Inertia::render('Prototype/ComicAdd');
+    })->name('add-comic');
 });
 
 require __DIR__ . '/auth.php';

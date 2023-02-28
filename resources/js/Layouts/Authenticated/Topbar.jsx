@@ -53,7 +53,7 @@ export default function Topbar (){
 		<>
         <nav>
 			<i className='bx bx-menu' ></i>
-			<a href="#" className="nav-link">Categories</a>
+			
 			<form action="#">
 				<div className="form-input">
 					<input type="search" placeholder="Search..." />
@@ -66,7 +66,9 @@ export default function Topbar (){
 				<i className='bx bxs-bell' ></i>
 				<span className="num">8</span>
 			</a>
+			<h1>nama</h1>
 			<a href="#" className="profile">
+				
 				<img src="https://upload.wikimedia.org/wikipedia/commons/4/4b/200710_%ED%95%9C%EC%86%8C%ED%9D%AC.png" />
 			</a>
 
