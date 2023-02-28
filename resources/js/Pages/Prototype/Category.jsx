@@ -24,7 +24,7 @@ export default function Category() {
 						<tbody>
 							<tr>
 								<td>
-									<img src="img/people.png" />
+									<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS5TdYsTZ2WFbJLwPwgbVfexWzppcvGaUxEcg&usqp=CAU" />
 									<p>John Doe</p>
 								</td>
 								<td>01-10-2021</td>
@@ -32,7 +32,7 @@ export default function Category() {
 							</tr>
 							<tr>
 								<td>
-									<img src="img/people.png" />
+									<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS5TdYsTZ2WFbJLwPwgbVfexWzppcvGaUxEcg&usqp=CAU" />
 									<p>John Doe</p>
 								</td>
 								<td>01-10-2021</td>
@@ -40,7 +40,7 @@ export default function Category() {
 							</tr>
 							<tr>
 								<td>
-									<img src="img/people.png" />
+									<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS5TdYsTZ2WFbJLwPwgbVfexWzppcvGaUxEcg&usqp=CAU" />
 									<p>John Doe</p>
 								</td>
 								<td>01-10-2021</td>
@@ -48,7 +48,7 @@ export default function Category() {
 							</tr>
 							<tr>
 								<td>
-									<img src="img/people.png" />
+									<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS5TdYsTZ2WFbJLwPwgbVfexWzppcvGaUxEcg&usqp=CAU" />
 									<p>John Doe</p>
 								</td>
 								<td>01-10-2021</td>
@@ -56,7 +56,7 @@ export default function Category() {
 							</tr>
 							<tr>
 								<td>
-									<img src="img/people.png" />
+									<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS5TdYsTZ2WFbJLwPwgbVfexWzppcvGaUxEcg&usqp=CAU" />
 									<p>John Doe</p>
 								</td>
 								<td>01-10-2021</td>
