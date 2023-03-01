@@ -1,11 +1,12 @@
 import PrimaryButton from "@/Components/PrimaryButton";
 import Authenticated from "@/Layouts/Authenticated/Index";
-import { Link } from "@inertiajs/react";
+import { Head, Link } from "@inertiajs/react";
 
 export default function Category() {
     return (
         <>
             <Authenticated>
+				<Head title="Category" />
             <div className="table-data">
 				<div className="order">
 					<div className="head">

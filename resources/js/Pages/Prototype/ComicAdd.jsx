@@ -1,5 +1,5 @@
 import Authenticated from "@/Layouts/Authenticated/Index";
-import { Link } from "@inertiajs/react";
+import { Head, Link } from "@inertiajs/react";
 import PrimaryButton from "@/Components/PrimaryButton";
 import InputLabel from "@/Components/InputLabel";
 import TextInput from "@/Components/TextInput";
@@ -8,6 +8,7 @@ import Dropdown from "@/Components/Dropdown";
 export default function ComicAdd (){
     return(
         <Authenticated>
+          <Head title="Add Comic" />
              <div className="table-data">
 				<div className="order">
                         <Link href={route('prototype.comic')}>

@@ -1,12 +1,12 @@
 import PrimaryButton from "@/Components/PrimaryButton";
 import Authenticated from "@/Layouts/Authenticated/Index";
-import { Link } from "@inertiajs/react";
+import { Head, Link } from "@inertiajs/react";
 
 export default function Comic() {
     return (
         <>
           <Authenticated>
-            
+            <Head title="Comic" />
           <div className="table-data">
 				<div className="order">
 					<div className="head">
@@ -38,12 +38,12 @@ export default function Comic() {
 								<td>Action</td>
 								<td>
                                     <Link>
-                                        <PrimaryButton className="bg-amber-300">
+                                        <PrimaryButton className="bg-yellow-500">
                                             Edit
                                         </PrimaryButton>
                                     </Link>
                                     <Link>
-                                        <PrimaryButton className="bg-amber-700">
+                                        <PrimaryButton className="bg-green-500">
                                             Detail
                                         </PrimaryButton>
                                     </Link>

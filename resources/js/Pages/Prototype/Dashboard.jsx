@@ -1,9 +1,11 @@
 import Authenticated from "@/Layouts/Authenticated/Index"
+import { Head } from "@inertiajs/react"
 
 export default function Dashboard() {
     return (
         <>
         <Authenticated>
+			<Head title="Dashboard" />
         <div className="head-title">
 				<div className="left">
 					<h1>Dashboard</h1>

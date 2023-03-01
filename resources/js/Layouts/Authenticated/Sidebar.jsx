@@ -28,7 +28,7 @@ export default function Sidebar (){
         <section id="sidebar">
 		<Link href="#" className="brand">
 			<i className='bx bxs-smile'></i>
-			<span className="text">Admin</span>
+			<span className="text">Comic</span>
 		</Link>
 		<ul className="side-menu top">
 			<li className="active">
