@@ -31,6 +31,9 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::prefix('prototype')->name('prototype.')->group(function () {
+    route::get('login', function () {
+        return Inertia::render('Prototype/Login');
+    })->name('login');
     route::get('dashboard', function () {
         return Inertia::render('Prototype/Dashboard');
     })->name('dashboard');
