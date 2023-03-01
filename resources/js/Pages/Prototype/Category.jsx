@@ -1,3 +1,4 @@
+import PrimaryButton from "@/Components/PrimaryButton";
 import Authenticated from "@/Layouts/Authenticated/Index";
 import { Link } from "@inertiajs/react";
 
@@ -10,13 +11,13 @@ export default function Category() {
 					<div className="head">
 						<h3>Category</h3>
                         <Link href={route('prototype.add-category')}>
-						    <i className='bx bxs-smile'>Add Category</i>
+						    <PrimaryButton className="bg-green-500 mb-4">Add Category</PrimaryButton>
                         </Link>
 					</div>
 					<table>
 						<thead>
 							<tr>
-								<th>Icon</th>
+								<th>No</th>
 								<th>Category</th>
 								<th>Status</th>
 							</tr>
@@ -28,40 +29,16 @@ export default function Category() {
 									<p>John Doe</p>
 								</td>
 								<td>01-10-2021</td>
-								<td><button className="status completed">Completed</button></td>
-							</tr>
-							<tr>
 								<td>
-									<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS5TdYsTZ2WFbJLwPwgbVfexWzppcvGaUxEcg&usqp=CAU" />
-									<p>John Doe</p>
+									<PrimaryButton className="bg-green-500">
+										Edit
+									</PrimaryButton>
+									<PrimaryButton className="bg-red-500">
+										Delete
+									</PrimaryButton>
 								</td>
-								<td>01-10-2021</td>
-								<td><span className="status pending">Pending</span></td>
 							</tr>
-							<tr>
-								<td>
-									<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS5TdYsTZ2WFbJLwPwgbVfexWzppcvGaUxEcg&usqp=CAU" />
-									<p>John Doe</p>
-								</td>
-								<td>01-10-2021</td>
-								<td><span className="status process">Process</span></td>
-							</tr>
-							<tr>
-								<td>
-									<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS5TdYsTZ2WFbJLwPwgbVfexWzppcvGaUxEcg&usqp=CAU" />
-									<p>John Doe</p>
-								</td>
-								<td>01-10-2021</td>
-								<td><span className="status pending">Pending</span></td>
-							</tr>
-							<tr>
-								<td>
-									<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS5TdYsTZ2WFbJLwPwgbVfexWzppcvGaUxEcg&usqp=CAU" />
-									<p>John Doe</p>
-								</td>
-								<td>01-10-2021</td>
-								<td><span className="status completed">Completed</span></td>
-							</tr>
+							
 						</tbody>
 					</table>
 				</div>
