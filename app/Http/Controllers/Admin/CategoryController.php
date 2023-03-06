@@ -16,7 +16,10 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        return inertia('Admin/Comic/Category');
+        $categories = CategoryComic::all();
+        return inertia('Admin/Comic/Category', [
+            'categories' => $categories
+        ]);
     }
 
     /**

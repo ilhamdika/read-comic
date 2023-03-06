@@ -4,7 +4,7 @@ import PrimaryButton from "@/Components/PrimaryButton";
 import FlashMessage from "@/Components/FlashMessage";
 
 
-export default function Index({auth, flashMessage}) {
+export default function Index({auth, flashMessage, categories, numbers}) {
     return (
         <Authenticated auth={auth}>
             <Head title="Category" />
@@ -28,12 +28,10 @@ export default function Index({auth, flashMessage}) {
 							</tr>
 						</thead>
 						<tbody>
-							<tr>
-								<td>
-									<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS5TdYsTZ2WFbJLwPwgbVfexWzppcvGaUxEcg&usqp=CAU" />
-									<p>John Doe</p>
-								</td>
-								<td>01-10-2021</td>
+							{categories.map((categori, i=1)  => (
+							<tr key={categori.id}>
+								<td>{i+1}</td>
+								<td>{categori.name}</td>
 								<td>
 									<PrimaryButton className="bg-green-500">
 										Edit
@@ -43,6 +41,7 @@ export default function Index({auth, flashMessage}) {
 									</PrimaryButton>
 								</td>
 							</tr>
+							))}
 							
 						</tbody>
 					</table>
