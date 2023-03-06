@@ -1,12 +1,12 @@
 import Sidebar from '@/Layouts/Authenticated/Sidebar'
 import Topbar from '@/Layouts/Authenticated/Topbar'
 
-export default function Authenticated({children}) {
+export default function Authenticated({auth, children}) {
     return (
         <>
         {/* <body> */}
             {/* Start:Sidebar */}
-            <Sidebar />
+            <Sidebar auth={auth}/>
             {/* End:Sidebar */}
 
             <section id="content">
