@@ -1,10 +1,10 @@
 import Authenticated from "@/Layouts/Authenticated/Index";
 import { Head, Link } from "@inertiajs/react";
 import PrimaryButton from "@/Components/PrimaryButton";
+import FlashMessage from "@/Components/FlashMessage";
 
 
-
-export default function Index({auth}) {
+export default function Index({auth, flashMessage}) {
     return (
         <Authenticated auth={auth}>
             <Head title="Category" />
@@ -15,7 +15,10 @@ export default function Index({auth}) {
                         <Link href={route('admin.dashboard.category.create')}>
 						    <PrimaryButton className="bg-green-500 mb-4">Add Category</PrimaryButton>
                         </Link>
+						
 					</div>
+					{flashMessage?.message && <FlashMessage message={flashMessage.message}/>}
+					
 					<table>
 						<thead>
 							<tr>
