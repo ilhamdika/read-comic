@@ -4,7 +4,7 @@ import PrimaryButton from "@/Components/PrimaryButton";
 import FlashMessage from "@/Components/FlashMessage";
 
 
-export default function Index({auth, flashMessage, categories, numbers}) {
+export default function Index({auth, flashMessage, categories}) {
     return (
         <Authenticated auth={auth}>
             <Head title="Category" />
@@ -33,9 +33,11 @@ export default function Index({auth, flashMessage, categories, numbers}) {
 								<td>{i+1}</td>
 								<td>{categori.name}</td>
 								<td>
-									<PrimaryButton className="bg-green-500">
-										Edit
-									</PrimaryButton>
+									<Link href={route('admin.dashboard.category.edit', categori.id)}>
+										<PrimaryButton className="bg-green-500">
+											Edit
+										</PrimaryButton>
+									</Link>
 									<PrimaryButton className="bg-red-500">
 										Delete
 									</PrimaryButton>

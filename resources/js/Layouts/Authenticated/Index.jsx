@@ -11,7 +11,7 @@ export default function Authenticated({auth, children}) {
 
             <section id="content">
                 {/* Start:Topbar */}
-                <Topbar />
+                <Topbar name={auth.user.name}/>
                 <main>{children}</main>
             </section>
             {/* Start:Content */}

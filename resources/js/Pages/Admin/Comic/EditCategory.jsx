@@ -4,10 +4,11 @@ import TextInput from "@/Components/TextInput";
 import { Head, Link, useForm } from "@inertiajs/react";
 import PrimaryButton from "@/Components/PrimaryButton";
 import InputError from "@/Components/InputError";
+import { Inertia } from '@inertiajs/inertia'; 
 
-export default function CreateCategory({auth}) {
-    const { setData, post, processing, errors } = useForm({
-        name:''
+export default function CreateCategory({auth, category}) {
+    const { data, setData,  processing, errors } = useForm({
+        ...category
     });
 
     
@@ -22,7 +23,10 @@ export default function CreateCategory({auth}) {
     const submit = (e) => {
         e.preventDefault();
 
-        post(route('admin.dashboard.category.store'));
+        Inertia.post(route('admin.dashboard.category.update', category.id), {
+            _method: 'PUT',
+            ...data
+        });
     };
 
     return(
@@ -31,7 +35,7 @@ export default function CreateCategory({auth}) {
             <Link href={route('admin.dashboard.category.index')}>
                 <PrimaryButton className="bg-green-500 mb-4">Back</PrimaryButton>
             </Link>
-            <h1 className="text-xl mb-2">Add Category</h1>
+            <h1 className="text-xl mb-2">Edit Category: {category.name}</h1>
             <form onSubmit={submit}>
                 <InputLabel 
                     forInput="name"
@@ -45,10 +49,11 @@ export default function CreateCategory({auth}) {
                     placeholder="Add Category"
                     iisError={errors.name}
                     className="w-full"
+                    defaultValue={category.name}
                 />
                 <InputError message={errors.name} className="mt-2" />
                 <PrimaryButton className="bg-blue-500 mt-4">
-                    Add Category
+                    Save
                 </PrimaryButton>
             </form>
         </Authenticated>

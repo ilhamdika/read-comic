@@ -70,7 +70,9 @@ export default function Sidebar (){
 				</Link>
 			</li>
 			<li>
-				<Link href="#" className="logout">
+				<Link href={route('logout')}
+				method="post"
+				className="logout">
 					<i className='bx bxs-log-out-circle' ></i>
 					<span className="text">Logout</span>
 				</Link>

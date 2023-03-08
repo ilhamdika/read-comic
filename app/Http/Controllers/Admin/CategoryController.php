@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\CategoryComic;
 use Illuminate\Http\Request;
 use App\Http\Requests\Admin\Comic\Category;
+use App\Http\Requests\Admin\Comic\EditCategory;
 
 class CategoryController extends Controller
 {
@@ -65,9 +66,11 @@ class CategoryController extends Controller
      * @param  \App\Models\CategoryComic  $categoryComic
      * @return \Illuminate\Http\Response
      */
-    public function edit(CategoryComic $categoryComic)
+    public function edit(CategoryComic $category)
     {
-        //
+        return inertia('Admin/Comic/EditCategory', [
+            'category' => $category
+        ]);
     }
 
     /**
@@ -77,9 +80,19 @@ class CategoryController extends Controller
      * @param  \App\Models\CategoryComic  $categoryComic
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, CategoryComic $categoryComic)
+    public function update(EditCategory $request, CategoryComic $category)
     {
-        //
+        // $data = $request->validated();
+        // $categoryComic->update($data);
+
+
+        $data = $request->validated();
+        $category->update($data);
+
+        return redirect(route('admin.dashboard.category.index'))->with([
+            'message' => 'Category updated successfully',
+            'type' => 'success'
+        ]);
     }
 
     /**
