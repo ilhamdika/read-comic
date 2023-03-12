@@ -17,7 +17,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $categories = CategoryComic::all();
+        $categories = CategoryComic::withTrashed()->orderBy('deleted_at')->get();
         return inertia('Admin/Comic/Category', [
             'categories' => $categories
         ]);
@@ -101,8 +101,21 @@ class CategoryController extends Controller
      * @param  \App\Models\CategoryComic  $categoryComic
      * @return \Illuminate\Http\Response
      */
-    public function destroy(CategoryComic $categoryComic)
+    public function destroy(CategoryComic $category)
     {
-        //
+        $category->delete();
+        return redirect(route('admin.dashboard.category.index'))->with([
+            'message' => 'Category deleted successfully',
+            'type' => 'success'
+        ]);
+    }
+
+    public function restore($category)
+    {
+        CategoryComic::withTrashed()->find($category)->restore();
+        return redirect(route('admin.dashboard.category.index'))->with([
+            'message' => 'Category restored successfully',
+            'type' => 'success'
+        ]);
     }
 }

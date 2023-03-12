@@ -1,3 +1,4 @@
+import PrimaryButton from "@/Components/PrimaryButton"
 import { Link } from "@inertiajs/react"
 
 export default function Sidebar (){
@@ -70,12 +71,12 @@ export default function Sidebar (){
 				</Link>
 			</li>
 			<li>
-				<Link href={route('logout')}
+				<PrimaryButton href={route('logout')}
 				method="post"
-				className="logout">
+				className="logout mt-9 ml-3 bg-red-600">
 					<i className='bx bxs-log-out-circle' ></i>
 					<span className="text">Logout</span>
-				</Link>
+				</PrimaryButton>
 			</li>
 		</ul>
 	</section>

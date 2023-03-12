@@ -1,10 +1,11 @@
 import Authenticated from "@/Layouts/Authenticated/Index";
-import { Head, Link } from "@inertiajs/react";
+import { Head, Link, useForm } from "@inertiajs/react";
 import PrimaryButton from "@/Components/PrimaryButton";
 import FlashMessage from "@/Components/FlashMessage";
 
 
 export default function Index({auth, flashMessage, categories}) {
+	const {delete: destroy, put} = useForm();
     return (
         <Authenticated auth={auth}>
             <Head title="Category" />
@@ -38,9 +39,20 @@ export default function Index({auth, flashMessage, categories}) {
 											Edit
 										</PrimaryButton>
 									</Link>
-									<PrimaryButton className="bg-red-500">
-										Delete
+									{/* <div onClick={()=> {
+										destroy(route('admin.dashboard.category.destroy', categori.id))
+									}}> */}
+									<PrimaryButton 
+									onClick={()=> {
+										categori.deleted_at ? put(route('admin.dashboard.category.restore', categori.id)) :
+										destroy(route('admin.dashboard.category.destroy', categori.id))
+									}}
+									className="bg-red-500"
+									
+									>
+										{categori.deleted_at ? 'Restore Category' : 'Delete'}
 									</PrimaryButton>
+									
 								</td>
 							</tr>
 							))}

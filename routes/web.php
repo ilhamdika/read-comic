@@ -32,6 +32,7 @@ Route::redirect('/', '/login');
 // });
 
 Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.dashboard.')->group(function () {
+    Route::put('category/{category}/restore', [CategoryController::class, 'restore'])->name('category.restore');
     Route::resource('category', CategoryController::class);
 });
 
