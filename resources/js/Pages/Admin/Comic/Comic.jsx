@@ -2,8 +2,15 @@ import PrimaryButton from "@/Components/PrimaryButton";
 import Authenticated from "@/Layouts/Authenticated/Index";
 import { Head, Link } from "@inertiajs/react";
 import FlashMessage from "@/Components/FlashMessage";
+import { usePage } from "@inertiajs/inertia-react";
 
-export default function Comic({auth, flashMessage}) {
+export default function Comic({auth, flashMessage, comics, categories}) {
+	
+	
+	const getCategoryName = (categoryId) =>{
+		const category = categories.find((c)=> c.id === categoryId)
+		return category ? category.name : '';
+	}
     return (
         <>
           <Authenticated auth={auth}>
@@ -30,14 +37,16 @@ export default function Comic({auth, flashMessage}) {
 							</tr>
 						</thead>
 						<tbody>
-							<tr>
-                                <td>1</td>
+							{comics.map((comic, i=1)  => (
+
+							<tr key={comic.id}>
+                                <td>{i+1}</td>
 								<td>
 									<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS5TdYsTZ2WFbJLwPwgbVfexWzppcvGaUxEcg&usqp=CAU" />
 									
 								</td>
-								<td>Naruto</td>
-								<td>Action</td>
+								<td>{comic.name}</td>
+								<td>{getCategoryName(comic.category_id)}</td>
 								<td>
                                     <Link>
                                         <PrimaryButton className="bg-yellow-500">
@@ -54,6 +63,7 @@ export default function Comic({auth, flashMessage}) {
                                     </PrimaryButton>
                                 </td>
 							</tr>
+							))}
 							
 						</tbody>
 					</table>
@@ -63,4 +73,5 @@ export default function Comic({auth, flashMessage}) {
           </Authenticated>
         </>
     )
+	
 }

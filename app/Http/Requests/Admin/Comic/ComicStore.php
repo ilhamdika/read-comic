@@ -25,7 +25,7 @@ class ComicStore extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|unique:category_comics,name',
+            'name' => 'required|unique:comics,name',
             'category_id' => 'required',
             'thumbnail' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'description' => 'required',

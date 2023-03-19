@@ -13,7 +13,7 @@ import Checkbox from "@/Components/Checkbox";
 export default function AddComic ({auth, categorys}){
     const category = categorys
     console.log(category)
-    const { setData, post, processing, errors } = useForm({
+    const { setData, post, processing, errors, } = useForm({
         name:"",
         slug: "",
         category_id: "",
@@ -21,8 +21,8 @@ export default function AddComic ({auth, categorys}){
         description: "",
 
     });
-
     const [selectedCategory, setSelectedCategory] = useState('');
+
     // function handleChange(event) {
     //     setSelectedCategory(event.target.value);
     // }
@@ -34,6 +34,10 @@ export default function AddComic ({auth, categorys}){
             : event.target.value)
         setSelectedCategory(event.target.value);
     };
+
+    // const handleChange = (et) => {
+    //     setData(setSelectedCategory(et.target.value));
+    // };
 
     const submit = (e) => {
         e.preventDefault();
@@ -78,10 +82,13 @@ export default function AddComic ({auth, categorys}){
                 
                 <select 
                 name="category_id"
-                alue={selectedCategory} 
+                value={selectedCategory} 
                 onChange={handleOnChange}
-                className="rounded-lg">
+                placeholder="Select Category"
+                className="rounded-lg w-full">
+                    <option value="" disabled selected>Select your option</option>
                     {categorys.map(category => (
+                        
                         <option 
                         type="text" 
                         key={category.id}

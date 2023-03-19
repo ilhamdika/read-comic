@@ -21,6 +21,7 @@ return new class extends Migration
             $table->foreign('category_id')->references('id')->on('category_comics');
             $table->string('thumbnail');
             $table->string('description');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

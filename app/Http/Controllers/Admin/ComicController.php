@@ -21,7 +21,14 @@ class ComicController extends Controller
      */
     public function index()
     {
-        return inertia('Admin/Comic/Comic');
+        // $comics = Comic::all();
+        $comics = Comic::with('category')->get();
+        $categories = CategoryComic::all();
+
+        return inertia('Admin/Comic/Comic', [
+            'comics' => $comics,
+            'categories' => $categories
+        ]);
     }
 
     /**
