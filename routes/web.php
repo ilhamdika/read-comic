@@ -5,6 +5,7 @@ use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\ComicController;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,6 +35,7 @@ Route::redirect('/', '/login');
 Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.dashboard.')->group(function () {
     Route::put('category/{category}/restore', [CategoryController::class, 'restore'])->name('category.restore');
     Route::resource('category', CategoryController::class);
+    Route::resource('comic', ComicController::class);
 });
 
 Route::prefix('prototype')->name('prototype.')->group(function () {

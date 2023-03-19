@@ -39,13 +39,13 @@ export default function Sidebar (){
 				</Link>
 			</li>
 			<li>
-				<Link href={route('prototype.category')}>
+				<Link href={route('admin.dashboard.category.index')}>
 					<i className='bx bxs-shopping-bag-alt' ></i>
 					<span className="text">Category</span>
 				</Link>
 			</li>
 			<li>
-				<Link href={route('prototype.comic')}>
+				<Link href={route('admin.dashboard.comic.index')}>
 					<i className='bx bxs-doughnut-chart' ></i>
 					<span className="text">Comic</span>
 				</Link>
