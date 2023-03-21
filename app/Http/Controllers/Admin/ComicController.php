@@ -75,7 +75,12 @@ class ComicController extends Controller
      */
     public function show(Comic $comic)
     {
-        return $comic;
+        $categories = CategoryComic::all();
+
+        return inertia('Admin/Comic/DetailComic', [
+            'comic' => $comic,
+            'categories' => $categories
+        ]);
     }
 
     /**
