@@ -42,18 +42,18 @@ export default function Comic({auth, flashMessage, comics, categories}) {
 							<tr key={comic.id}>
                                 <td>{i+1}</td>
 								<td>
-									<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS5TdYsTZ2WFbJLwPwgbVfexWzppcvGaUxEcg&usqp=CAU" />
+									<img src={`/storage/${comic.thumbnail}`} />
 									
 								</td>
 								<td>{comic.name}</td>
 								<td>{getCategoryName(comic.category_id)}</td>
 								<td>
-                                    <Link>
+                                    <Link href={route('admin.dashboard.comic.edit', comic.id)}>
                                         <PrimaryButton className="bg-yellow-500">
                                             Edit
                                         </PrimaryButton>
                                     </Link>
-                                    <Link>
+                                    <Link href={route('admin.dashboard.comic.show', comic.id)}>
                                         <PrimaryButton className="bg-green-500">
                                             Detail
                                         </PrimaryButton>

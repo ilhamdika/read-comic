@@ -1,52 +1,37 @@
-import React,{ useState } from "react";
+import { useState } from "react";
 import Authenticated from "@/Layouts/Authenticated/Index";
 import { Head, Link, useForm } from "@inertiajs/react";
 import PrimaryButton from "@/Components/PrimaryButton";
 import InputLabel from "@/Components/InputLabel";
 import TextInput from "@/Components/TextInput";
-import NewDropdown from "@/Components/NewDropdown";
+
 import InputError from "@/Components/InputError";
-
 import { Inertia } from "@inertiajs/inertia";
-import Dropdown from "@/Components/Dropdown";
-import Checkbox from "@/Components/Checkbox";
 
-export default function AddComic ({auth, categorys}){
+
+export default function EditComic ({auth, categorys, comic}){
     const category = categorys
     console.log(category)
 
-    
-    
-
-    const { setData, post, processing, errors, } = useForm({
-        name:"",
-        slug: "",
-        category_id: "",
-        thumbnail: "",
-        description: "",
-
+    const getCategoryName = (categoryId) =>{
+		const category = categorys.find((c)=> c.id === categoryId)
+		return category ? category.name : '';
+	}
+    const { data, setData,  processing, errors } = useForm({
+        ...comic
     });
-
-
     const [selectedCategory, setSelectedCategory] = useState('');
-    const [category_id, setCategory_id] = useState('');
-    
 
     // function handleChange(event) {
     //     setSelectedCategory(event.target.value);
     // }
 
-
     const handleOnChange = (event) => {
         setData(event.target.name, 
             event.target.type === 'file'
             ? event.target.files[0]
-            : event.target.value
-            )
-            setSelectedCategory(event.target.value);
-        ;
-        
-            
+            : event.target.value)
+        setSelectedCategory(event.target.value);
     };
 
     // const handleChange = (et) => {
@@ -55,8 +40,15 @@ export default function AddComic ({auth, categorys}){
 
     const submit = (e) => {
         e.preventDefault();
+        
+        if(data.thumbnail === comic.thumbnail){
+            delete data.thumbnail;
+        }
 
-        post(route('admin.dashboard.comic.store'));
+        Inertia.post(route('admin.dashboard.comic.update', comic.id), {
+            _method: 'PUT',
+            ...data
+        });
     };
 
     return(
@@ -69,7 +61,7 @@ export default function AddComic ({auth, categorys}){
                                 Back
                             </PrimaryButton>
                         </Link>
-						<h1 className="text-xl">Add Comic</h1>
+						<h1 className="text-xl">Edit Comic: {comic.name}</h1>
 					<div className="head">
 					</div>
           <form onSubmit={submit}>
@@ -82,6 +74,7 @@ export default function AddComic ({auth, categorys}){
                     type="text"
                     name="name"
                     handleChange={handleOnChange}
+                    defaultValue={comic.name}
                     placeholder="Add Title"
                     className="w-full"
                 />
@@ -100,30 +93,27 @@ export default function AddComic ({auth, categorys}){
                 onChange={handleOnChange}
                 placeholder="Select Category"
                 className="rounded-lg w-full">
-                    <option value="" disabled selected>Select your option</option>
+                    <option 
+                    value="" 
+                    className="text-red-500 font-bold mt-2"
+                    >
+                        {getCategoryName(comic.category_id)}
+                    </option>
                     {categorys.map(category => (
                         
                         <option 
                         type="text" 
                         key={category.id}
                         value={category.id}
+                        
                         >
                                 {category.name}
                         </option>
                     ))}
                 </select>
-
+                <h1 className="mt-1">Category awal: {getCategoryName(comic.category_id)} </h1>
+                <h1 className="text-red-500">apakah kamu ingin mengubah?</h1>
                 <InputError message={errors.category_id} className="mt-2" />
-
-                {/* <NewDropdown 
-                type="text"
-                name="category_id" 
-                options={categorys} 
-                value={selectedCategory} 
-                onChange={handleOnChange}
-                placeholder="Select Category"
-                
-                /> */}
 
                 <InputLabel 
                     input="description"
@@ -134,6 +124,7 @@ export default function AddComic ({auth, categorys}){
                     type="text"
                     name="description"
                     handleChange={handleOnChange}
+                    defaultValue={comic.description}
                     placeholder="Add sinopsis"
                     className="w-full h-32"
                 />
@@ -146,6 +137,7 @@ export default function AddComic ({auth, categorys}){
                 <TextInput
                     type="file"
                     name="thumbnail"
+                    
                     handleChange={handleOnChange}
                     placeholder="Add Thumbnail"
                     className="w-full"

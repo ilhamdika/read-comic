@@ -6,7 +6,7 @@ import PrimaryButton from "@/Components/PrimaryButton";
 import InputError from "@/Components/InputError";
 import { Inertia } from '@inertiajs/inertia'; 
 
-export default function CreateCategory({auth, category}) {
+export default function EditCategory({auth, category}) {
     const { data, setData,  processing, errors } = useForm({
         ...category
     });

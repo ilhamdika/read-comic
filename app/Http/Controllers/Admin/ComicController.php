@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\Admin\Comic\ComicStore;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use App\Http\Requests\Admin\Comic\EditComic;
 
 
 class ComicController extends Controller
@@ -62,6 +63,7 @@ class ComicController extends Controller
             'message' => 'Comic created successfully',
             'type' => 'success'
         ]);
+        // return $request->all();
     }
 
     /**
@@ -72,7 +74,7 @@ class ComicController extends Controller
      */
     public function show(Comic $comic)
     {
-        //
+        return $comic;
     }
 
     /**
@@ -81,9 +83,12 @@ class ComicController extends Controller
      * @param  \App\Models\Comic  $comic
      * @return \Illuminate\Http\Response
      */
-    public function edit(Comic $comic)
+    public function edit(Comic $comic, CategoryComic $category)
     {
-        //
+        return inertia('Admin/Comic/EditComic', [
+            'comic' => $comic,
+            'categorys' => $category->all(),
+        ]);
     }
 
     /**
@@ -93,9 +98,35 @@ class ComicController extends Controller
      * @param  \App\Models\Comic  $comic
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Comic $comic)
+    public function update(EditComic $request, Comic $comic)
     {
-        //
+        // $data = $request->validate([
+        //     'name' => ['required', 'string', 'max:255'],
+        //     'category_id' => ['required', 'integer'],
+        //     'thumbnail' => ['required', 'image', 'mimes:jpeg,png,jpg,gif,svg', 'max:2048'],
+        //     'description' => ['required', 'string'],
+        // ]);
+        $data = $request->validated();
+        if ($request->file('thumbnail')) {
+            $data['thumbnail'] = Storage::disk('public')->put('comic', $request->file('thumbnail'));
+            Storage::disk('public')->delete($comic->thumbnail);
+        } else {
+            $data['thumbnail'] = $comic->thumbnail;
+        }
+        // $comic->name = $data['name'];
+        // $comic->category_id = $data['category_id'];
+        // $comic->thumbnail = $data['thumbnail'];
+        // $comic->description = $data['description'];
+        // $comic->save();
+
+        $comic->update($data);
+
+        // return $request->all();
+
+        return redirect(route('admin.dashboard.comic.index'))->with([
+            'message' => 'Comic updated successfully',
+            'type' => 'success'
+        ]);
     }
 
     /**
