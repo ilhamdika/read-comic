@@ -2,10 +2,10 @@ import PrimaryButton from "@/Components/PrimaryButton";
 import Authenticated from "@/Layouts/Authenticated/Index";
 import { Head, Link } from "@inertiajs/react";
 import FlashMessage from "@/Components/FlashMessage";
-import { usePage } from "@inertiajs/inertia-react";
+import { useForm } from "@inertiajs/inertia-react";
 
 export default function Comic({auth, flashMessage, comics, categories}) {
-	
+	const {delete: destroy, put} =useForm()
 	
 	const getCategoryName = (categoryId) =>{
 		const category = categories.find((c)=> c.id === categoryId)
@@ -58,9 +58,17 @@ export default function Comic({auth, flashMessage, comics, categories}) {
                                             Detail
                                         </PrimaryButton>
                                     </Link>
-                                    <PrimaryButton className="bg-red-600">
-                                        Delete
-                                    </PrimaryButton>
+
+                                    <PrimaryButton 
+									onClick={()=> {
+										comic.deleted_at ? put(route('admin.dashboard.comic.restore', comic.id)) :
+										destroy(route('admin.dashboard.comic.destroy', comic.id)) 
+									}}
+									className={comic.deleted_at ? 'bg-teal-700' : 'bg-red-500'} 
+									
+									>
+										{comic.deleted_at ? 'Restore Comic' : 'Delete'}
+									</PrimaryButton>
                                 </td>
 							</tr>
 							))}

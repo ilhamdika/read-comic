@@ -22,8 +22,9 @@ class ComicController extends Controller
      */
     public function index()
     {
-        // $comics = Comic::all();
-        $comics = Comic::with('category')->get();
+
+        // $comics = Comic::with('category')->get();
+        $comics = Comic::withTrashed()->orderBy('deleted_at')->get();
         $categories = CategoryComic::all();
 
         return inertia('Admin/Comic/Comic', [
@@ -137,6 +138,19 @@ class ComicController extends Controller
      */
     public function destroy(Comic $comic)
     {
-        //
+        $comic->delete();
+        return redirect(route('admin.dashboard.comic.index'))->with([
+            'message' => 'Comic deleted successfully',
+            'type' => 'success'
+        ]);
+    }
+
+    public function restore($comic)
+    {
+        Comic::withTrashed()->find($comic)->restore();
+        return redirect(route('admin.dashboard.comic.index'))->with([
+            'message' => 'Movie was deleted succesfully Restore',
+            'type' => 'success'
+        ]);
     }
 }
