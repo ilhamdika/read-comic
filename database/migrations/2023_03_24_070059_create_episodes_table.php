@@ -13,16 +13,16 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('comics', function (Blueprint $table) {
+        Schema::create('episodes', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->unsignedBigInteger('comic_id');
+            $table->foreign('comic_id')->references('id')->on('comics');
+            $table->string('episode');
+            $table->string('title');
             $table->string('slug');
-            $table->unsignedBigInteger('category_id');
-            $table->foreign('category_id')->references('id')->on('category_comics');
             $table->string('thumbnail');
             $table->string('description');
-            $table->unsignedBigInteger('episode_id');
-            $table->softDeletes();
+            $table->string('file');
             $table->timestamps();
         });
     }
@@ -34,6 +34,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('comics');
+        Schema::dropIfExists('episodes');
     }
 };

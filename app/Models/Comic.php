@@ -26,4 +26,9 @@ class Comic extends Model
     {
         return $this->belongsTo(CategoryComic::class, 'category_id');
     }
+
+    public function episodes()
+    {
+        return $this->hasMany(Episode::class, 'comic_id');
+    }
 }

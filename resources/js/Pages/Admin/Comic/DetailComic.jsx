@@ -36,7 +36,11 @@ export default function DetailComic ({auth, comic, categories}){
                     <h1 className="text-xl">Episode</h1>
                 </div>
                 <div className="flex-auto w-32 ... ">
-                    <PrimaryButton className="bg-green-500 justify-end">Add Episode</PrimaryButton>
+                    <Link href={route('admin.dashboard.episodes.create', comic.id)}>
+                        <PrimaryButton className="bg-green-500 justify-end">
+                            Add Episode
+                        </PrimaryButton>
+                    </Link>
                 </div>
            </div>
 
