@@ -1,8 +1,11 @@
 import PrimaryButton from "@/Components/PrimaryButton";
 import Authenticated from "@/Layouts/Authenticated/Index";
 import { Link } from "@inertiajs/react";
+import { useForm } from "@inertiajs/inertia-react";
 
-export default function DetailComic ({auth, comic, categories}){
+
+export default function DetailComic ({auth, comic, categories, episodes}){
+    const {delete: destroy, put} =useForm()
     const getCategoryName = (categoryId) =>{
 		const category = categories.find((c)=> c.id === categoryId)
 		return category ? category.name : '';
@@ -41,44 +44,49 @@ export default function DetailComic ({auth, comic, categories}){
                             Add Episode
                         </PrimaryButton>
                     </Link>
+                    
                 </div>
            </div>
 
-           <table className="mt-10">
+             <table className="mt-10 hover:table-fixed">
 						<thead>
 							<tr>
-								<th>No</th>
-								<th>Thumbail</th>
+								<th className="text-center">No</th>
+								<th className="text-center">Thumbail</th>
 								<th>Episode</th>
 								<th>Title</th>
-                                
+                                <th>Description</th>
 								<th>Action</th>
 							</tr>
 						</thead>
                         <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>
-                                    <img className="w-60 h-40" src="https://assets.suaramerdeka.com/crop/0x0:0x0/750x500/webp/photo/2022/04/14/1179310321.jpg" />
-                                </td>
-                                <td>Episode 01</td>
-                                <td>Luffy berangkat ke laut untuk menemukan kru bajak lautnya Lorem, ipsum dolor sit amet consectetur adipisicing elit. Earum impedit eveniet doloribus, ducimus eaque aperiam aspernatur sunt enim minus, ullam, nostrum vitae illo iusto! Exercitationem vitae autem ab magni. Excepturi.</td>
-                                
-                                <td>
-                                    <Link>
-                                        <PrimaryButton className="bg-yellow-500">
-                                            Edit
+                            {episodes.map((episode, i=1) => (
+                                <tr key={episode.id}>
+                                    <td>{i+1}</td>
+                                    <td><img className="w-60 h-40" src={`/storage/${episode.thumbnail}`} /></td>
+                                    <td className="text-center">{episode.episode}</td>
+                                    <td className="text-center">{episode.title}</td>
+                                    <td className="text-center">{episode.description}</td>
+                                    <td className="text-center">
+                                        <Link href={route('admin.dashboard.episodes.edit', episode.id)}>
+                                            <PrimaryButton className="bg-yellow-500">
+                                                Edit
+                                            </PrimaryButton>
+                                        </Link>
+                                        <PrimaryButton
+                                        onClick={() => {
+                                            destroy(route('admin.dashboard.episodes.destroy', episode.id))
+                                        }}
+                                        className="bg-red-500">
+                                            Delete
                                         </PrimaryButton>
-                                    </Link>
-                                    <Link>
-                                        <PrimaryButton className="bg-green-500">
-                                            Detail
-                                        </PrimaryButton>
-                                    </Link>
-                                </td>
-                            </tr>
+                                      
+                                    </td>
+                                </tr>
+                            ))}
                         </tbody>
-            </table>
+                    </table>
+            
         </Authenticated>
     )
 }

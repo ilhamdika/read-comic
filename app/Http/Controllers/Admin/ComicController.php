@@ -11,7 +11,7 @@ use App\Http\Requests\Admin\Comic\ComicStore;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use App\Http\Requests\Admin\Comic\EditComic;
-
+use App\Models\Episode;
 
 class ComicController extends Controller
 {
@@ -23,7 +23,7 @@ class ComicController extends Controller
     public function index()
     {
 
-        // $comics = Comic::with('category')->get();
+
         $comics = Comic::withTrashed()->orderBy('deleted_at')->get();
         $categories = CategoryComic::all();
 
@@ -44,7 +44,6 @@ class ComicController extends Controller
         return inertia('Admin/Comic/AddComic', [
             'categorys' => $category
         ]);
-        // return $category;
     }
 
     /**
@@ -64,7 +63,6 @@ class ComicController extends Controller
             'message' => 'Comic created successfully',
             'type' => 'success'
         ]);
-        // return $request->all();
     }
 
     /**
@@ -76,10 +74,12 @@ class ComicController extends Controller
     public function show(Comic $comic)
     {
         $categories = CategoryComic::all();
+        $episodes = Episode::where('comic_id', $comic->id)->get();
 
         return inertia('Admin/Comic/DetailComic', [
             'comic' => $comic,
-            'categories' => $categories
+            'categories' => $categories,
+            'episodes' => $episodes
         ]);
     }
 
@@ -106,12 +106,7 @@ class ComicController extends Controller
      */
     public function update(EditComic $request, Comic $comic)
     {
-        // $data = $request->validate([
-        //     'name' => ['required', 'string', 'max:255'],
-        //     'category_id' => ['required', 'integer'],
-        //     'thumbnail' => ['required', 'image', 'mimes:jpeg,png,jpg,gif,svg', 'max:2048'],
-        //     'description' => ['required', 'string'],
-        // ]);
+
         $data = $request->validated();
         if ($request->file('thumbnail')) {
             $data['thumbnail'] = Storage::disk('public')->put('comic', $request->file('thumbnail'));
@@ -119,15 +114,10 @@ class ComicController extends Controller
         } else {
             $data['thumbnail'] = $comic->thumbnail;
         }
-        // $comic->name = $data['name'];
-        // $comic->category_id = $data['category_id'];
-        // $comic->thumbnail = $data['thumbnail'];
-        // $comic->description = $data['description'];
-        // $comic->save();
+
 
         $comic->update($data);
 
-        // return $request->all();
 
         return redirect(route('admin.dashboard.comic.index'))->with([
             'message' => 'Comic updated successfully',

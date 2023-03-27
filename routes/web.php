@@ -40,11 +40,12 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.dashboar
     Route::resource('comic', ComicController::class);
     // Route::resource('episodes', EpisodeController::class);
     //Route Episode
+    Route::get('/comic/{id}/episodes', [EpisodeController::class, 'index'])->name('episodes.index');
     Route::get('/comic/{id}/episodes/create', [EpisodeController::class, 'create'])->name('episodes.create');
     Route::post('/episodes', [EpisodeController::class, 'store'])->name('episodes.store');
-    Route::get('/episodes/{id}/edit', [EpisodeController::class, 'edit'])->name('episodes.edit');
-    Route::put('/episodes/{id}', [EpisodeController::class, 'update'])->name('episodes.update');
-    Route::delete('/episodes/{id}', [EpisodeController::class, 'destroy'])->name('episodes.destroy');
+    Route::get('/episodes/{episode}/edit', [EpisodeController::class, 'edit'])->name('episodes.edit');
+    Route::put('/episodes/{episode}', [EpisodeController::class, 'update'])->name('episodes.update');
+    Route::delete('/episodes/{episode}', [EpisodeController::class, 'destroy'])->name('episodes.destroy');
 });
 
 Route::prefix('prototype')->name('prototype.')->group(function () {

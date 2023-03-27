@@ -1,39 +1,37 @@
-import React,{ useState } from "react";
-import Authenticated from "@/Layouts/Authenticated/Index";
-import { Head, Link, useForm } from "@inertiajs/react";
-import PrimaryButton from "@/Components/PrimaryButton";
-import InputLabel from "@/Components/InputLabel";
-import TextInput from "@/Components/TextInput";
-
-import InputError from "@/Components/InputError";
-
+import Authenticated from "@/Layouts/Authenticated/Index"
+import { Head, Link, useForm } from "@inertiajs/react"
+import PrimaryButton from "@/Components/PrimaryButton"
+import InputLabel from "@/Components/InputLabel"
+import TextInput from "@/Components/TextInput"
+import InputError from "@/Components/InputError"
+import { Inertia } from "@inertiajs/inertia"
 
 
-export default function AddEpisode ({auth, comic}){
-    
-    const { setData, post, processing, errors, } = useForm({
-        comic_id: comic.id,
-        episode:"",
-        title: "",
-        thumbnail: "",
-        description: "",
-        file: "", 
-
+export default function EditEpisode ({auth, episode}){
+    const { data, setData,  processing, errors } = useForm({
+        ...episode
     });
 
     const handleOnChange = (event) => {
         setData(event.target.name, 
             event.target.type === 'file'
             ? event.target.files[0]
-            : event.target.value);
+            : event.target.value)
     };
-   
-
 
     const submit = (e) => {
         e.preventDefault();
+        
+        if(data.thumbnail === episode.thumbnail){
+            delete data.thumbnail;
+        } if (data.file === episode.file){
+            delete data.file;
+        }
 
-        post(route('admin.dashboard.episodes.store'));
+        Inertia.post(route('admin.dashboard.episodes.update', episode.id), {
+            _method: 'PUT',
+            ...data
+        });
     };
 
     return(
@@ -46,7 +44,7 @@ export default function AddEpisode ({auth, comic}){
                                 Back
                             </PrimaryButton>
                         </Link>
-						<h1 className="text-xl">Add Episode : {comic.name}</h1>
+						<h1 className="text-xl">Edit Episode : {episode.episode}</h1>
 					<div className="head">
 					</div>
           <form onSubmit={submit}>
@@ -61,6 +59,7 @@ export default function AddEpisode ({auth, comic}){
                     handleChange={handleOnChange}
                     placeholder="Add episode berapa"
                     className="w-full"
+                    defaultValue={episode.episode}
                 />
                 <InputError message={errors.episode} className="mt-2" />
                 
@@ -76,6 +75,7 @@ export default function AddEpisode ({auth, comic}){
                     handleChange={handleOnChange}
                     placeholder="Add episode title"
                     className="w-full"
+                    defaultValue={episode.title}
                 />
                 <InputError message={errors.title} className="mt-2" />
 
@@ -92,6 +92,7 @@ export default function AddEpisode ({auth, comic}){
                     className="w-full"
                 />
                 <InputError message={errors.thumbnail} className="mt-2" />
+                <img src={`/storage/${episode.thumbnail}`} alt="thumbnail" className="w-25 h-20 mb-4" />
 
                 <InputLabel 
                     input="description"
@@ -104,6 +105,7 @@ export default function AddEpisode ({auth, comic}){
                     handleChange={handleOnChange}
                     placeholder="Add sinopsis"
                     className="w-full h-32"
+                    defaultValue={episode.description}
                 />
                 <InputError message={errors.description} className="mt-2" />
 
@@ -123,11 +125,13 @@ export default function AddEpisode ({auth, comic}){
                 />
                 <InputError message={errors.file} className="mt-2" />
 
+                <embed src={`/storage/${episode.file}`} alt="file" className="w-25 h-20 mb-4" controls />
+
                  
                 
 
                 <PrimaryButton className="bg-blue-700 mt-4" processing={processing}>
-                    Add Episode
+                    Update
                 </PrimaryButton>
             </form>
 

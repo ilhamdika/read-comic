@@ -4,8 +4,9 @@ namespace App\Http\Requests\Admin\Comic;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Episode;
 
-class EpisodeStore extends FormRequest
+class EpisodeUpdate extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,14 +23,14 @@ class EpisodeStore extends FormRequest
      *
      * @return array<string, mixed>
      */
-    public function rules()
+    public function rules(Episode $episode)
     {
         return [
-            'episode' => 'required|numeric',
-            'title' => 'required|string',
-            'thumbnail' => 'required|image',
-            'description' => 'required|string',
-            'file' =>  'required|mimes:pdf,doc,docx,zip,rar',
+            'episode' => 'nullable|string' . $episode->id,
+            'title' => 'nullable|string',
+            'thumbnail' => 'nullable|image',
+            'description' => 'nullable|string',
+            'file' =>  'nullable|mimes:pdf,doc,docx,zip,rar',
 
         ];
     }

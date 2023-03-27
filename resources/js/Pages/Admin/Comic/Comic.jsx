@@ -48,12 +48,14 @@ export default function Comic({auth, flashMessage, comics, categories}) {
 								<td>{comic.name}</td>
 								<td>{getCategoryName(comic.category_id)}</td>
 								<td>
-                                    <Link href={route('admin.dashboard.comic.edit', comic.id)}>
+                                    <Link href={route('admin.dashboard.comic.edit', comic.id)}
+									className="mr-2">
                                         <PrimaryButton className="bg-yellow-500">
                                             Edit
                                         </PrimaryButton>
                                     </Link>
-                                    <Link href={route('admin.dashboard.comic.show', comic.id)}>
+                                    <Link href={route('admin.dashboard.comic.show', comic.id)}
+									className="mr-2">
                                         <PrimaryButton className="bg-green-500">
                                             Detail
                                         </PrimaryButton>
