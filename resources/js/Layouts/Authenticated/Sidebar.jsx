@@ -1,3 +1,4 @@
+import PrimaryButton from "@/Components/PrimaryButton"
 import { Link } from "@inertiajs/react"
 
 export default function Sidebar (){
@@ -32,19 +33,19 @@ export default function Sidebar (){
 		</Link>
 		<ul className="side-menu top">
 			<li className="active">
-				<Link href={route('prototype.dashboard')}>
+				<Link href={route('admin.dashboard.index')}>
 					<i className='bx bxs-dashboard' ></i>
 					<span className="text">Dashboard</span>
 				</Link>
 			</li>
 			<li>
-				<Link href={route('prototype.category')}>
+				<Link href={route('admin.dashboard.category.index')}>
 					<i className='bx bxs-shopping-bag-alt' ></i>
 					<span className="text">Category</span>
 				</Link>
 			</li>
 			<li>
-				<Link href={route('prototype.comic')}>
+				<Link href={route('admin.dashboard.comic.index')}>
 					<i className='bx bxs-doughnut-chart' ></i>
 					<span className="text">Comic</span>
 				</Link>
@@ -70,10 +71,12 @@ export default function Sidebar (){
 				</Link>
 			</li>
 			<li>
-				<Link href="#" className="logout">
-					<i className='bx bxs-log-out-circle' ></i>
-					<span className="text">Logout</span>
-				</Link>
+			<Link href={route('logout')} 
+                method="post"
+                className="mt-11"
+				as="button">
+                    Log Out
+                </Link>
 			</li>
 		</ul>
 	</section>

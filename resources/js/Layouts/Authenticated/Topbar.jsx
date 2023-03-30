@@ -1,6 +1,6 @@
 
 
-export default function Topbar (){
+export default function Topbar ({name}){
 	
 // const searchButton = document.querySelector('#content nav form .form-input button');
 // const searchButtonIcon = document.querySelector('#content nav form .form-input button .bx');
@@ -66,7 +66,7 @@ export default function Topbar (){
 				<i className='bx bxs-bell' ></i>
 				<span className="num">8</span>
 			</a>
-			<h1>nama</h1>
+			<h1>{name}</h1>
 			<a href="#" className="profile">
 				
 				<img src="https://upload.wikimedia.org/wikipedia/commons/4/4b/200710_%ED%95%9C%EC%86%8C%ED%9D%AC.png" />
