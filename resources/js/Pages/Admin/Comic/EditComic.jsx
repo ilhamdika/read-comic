@@ -10,8 +10,7 @@ import { Inertia } from "@inertiajs/inertia";
 
 
 export default function EditComic ({auth, categorys, comic}){
-    const category = categorys
-    console.log(category)
+    
 
     const getCategoryName = (categoryId) =>{
 		const category = categorys.find((c)=> c.id === categoryId)
@@ -143,8 +142,11 @@ export default function EditComic ({auth, categorys, comic}){
                     className="w-full"
                 />
 
+                <img src={`/storage/${comic.thumbnail}`} alt="thumbnail" className="w-25 h-20 mb-4" />
+
+
                 <PrimaryButton className="bg-blue-700 mt-4" processing={processing}>
-                    Add Comic
+                    Save
                 </PrimaryButton>
             </form>
 

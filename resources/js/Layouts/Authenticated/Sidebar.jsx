@@ -33,7 +33,7 @@ export default function Sidebar (){
 		</Link>
 		<ul className="side-menu top">
 			<li className="active">
-				<Link href={route('prototype.dashboard')}>
+				<Link href={route('admin.dashboard.index')}>
 					<i className='bx bxs-dashboard' ></i>
 					<span className="text">Dashboard</span>
 				</Link>
@@ -71,12 +71,12 @@ export default function Sidebar (){
 				</Link>
 			</li>
 			<li>
-				<PrimaryButton href={route('logout')}
-				method="post"
-				className="logout mt-9 ml-3 bg-red-600">
-					<i className='bx bxs-log-out-circle' ></i>
-					<span className="text">Logout</span>
-				</PrimaryButton>
+			<Link href={route('logout')} 
+                method="post"
+                className="mt-11"
+				as="button">
+                    Log Out
+                </Link>
 			</li>
 		</ul>
 	</section>

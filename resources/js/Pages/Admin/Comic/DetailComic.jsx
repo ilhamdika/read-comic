@@ -14,7 +14,7 @@ export default function DetailComic ({auth, comic, categories, episodes}){
     return (
         <Authenticated auth={auth}>
             <Link href={route('admin.dashboard.comic.index')}>
-            <PrimaryButton>Back</PrimaryButton>
+            <PrimaryButton className="bg-green-500">Back</PrimaryButton>
             </Link>
            
             <div className="flex ...">
