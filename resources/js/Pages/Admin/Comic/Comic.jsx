@@ -1,0 +1,87 @@
+import PrimaryButton from "@/Components/PrimaryButton";
+import Authenticated from "@/Layouts/Authenticated/Index";
+import { Head, Link } from "@inertiajs/react";
+import FlashMessage from "@/Components/FlashMessage";
+import { useForm } from "@inertiajs/inertia-react";
+
+export default function Comic({auth, flashMessage, comics, categories}) {
+	const {delete: destroy, put} =useForm()
+	
+	const getCategoryName = (categoryId) =>{
+		const category = categories.find((c)=> c.id === categoryId)
+		return category ? category.name : '';
+	}
+    return (
+        <>
+          <Authenticated auth={auth}>
+            <Head title="Comic" />
+          <div className="table-data">
+				<div className="order">
+					<div className="head">
+						<h3>Comic</h3>
+                        <Link href={route('admin.dashboard.comic.create')}>
+						    <PrimaryButton className="bg-green-500">
+                                Add Comic
+                            </PrimaryButton>
+                        </Link>
+					</div>
+					{flashMessage?.message && <FlashMessage message={flashMessage.message}/>}
+					<table>
+						<thead>
+							<tr>
+								<th>No</th>
+								<th>Thumbail</th>
+								<th>Title</th>
+								<th>Category</th>
+								<th>Action</th>
+							</tr>
+						</thead>
+						<tbody>
+							{comics.map((comic, i=1)  => (
+
+							<tr key={comic.id}>
+                                <td>{i+1}</td>
+								<td>
+									<img src={`/storage/${comic.thumbnail}`} />
+									
+								</td>
+								<td>{comic.name}</td>
+								<td>{getCategoryName(comic.category_id)}</td>
+								<td>
+                                    <Link href={route('admin.dashboard.comic.edit', comic.id)}
+									className="mr-2">
+                                        <PrimaryButton className="bg-yellow-500">
+                                            Edit
+                                        </PrimaryButton>
+                                    </Link>
+                                    <Link href={route('admin.dashboard.comic.show', comic.id)}
+									className="mr-2">
+                                        <PrimaryButton className="bg-green-500">
+                                            Detail
+                                        </PrimaryButton>
+                                    </Link>
+
+                                    <PrimaryButton 
+									onClick={()=> {
+										comic.deleted_at ? put(route('admin.dashboard.comic.restore', comic.id)) :
+										destroy(route('admin.dashboard.comic.destroy', comic.id)) 
+									}}
+									className={comic.deleted_at ? 'bg-teal-700' : 'bg-red-500'} 
+									
+									>
+										{comic.deleted_at ? 'Restore Comic' : 'Delete'}
+									</PrimaryButton>
+                                </td>
+							</tr>
+							))}
+							
+						</tbody>
+					</table>
+				</div>
+				
+			</div>
+          </Authenticated>
+        </>
+    )
+	
+}
