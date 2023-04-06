@@ -71,6 +71,10 @@ Route::prefix('prototype')->name('prototype.')->group(function () {
     route::get('add-comic', function () {
         return Inertia::render('Prototype/ComicAdd');
     })->name('add-comic');
+
+    route::get('landing-user', function () {
+        return Inertia::render('Prototype/LandingPageUser');
+    })->name('landing-user');
 });
 
 Route::middleware('auth')->group(function () {
