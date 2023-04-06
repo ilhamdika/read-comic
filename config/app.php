@@ -186,6 +186,7 @@ return [
          * Package Service Providers...
          */
         Spatie\Permission\PermissionServiceProvider::class,
+        Inertia\ServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -196,6 +197,11 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
+    ],
+
+    'middleware' => [
+        // ...
+        \App\Http\Middleware\HandleInertiaRequests::class,
     ],
 
     /*
